@@ -29,8 +29,5 @@ const ReviewSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Jedan korisnik može ostaviti samo jednu recenziju po filmu
-ReviewSchema.index({ user: 1, movieAPI: 1 }, { unique: true });
-
 const Review = mongoose.model("Review", ReviewSchema);
 module.exports = Review;
