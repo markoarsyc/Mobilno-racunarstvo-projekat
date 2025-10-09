@@ -7,9 +7,12 @@ const ReviewSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    movie: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Movie",
+    movieAPI: {
+      type: Number,
+      required: true,
+    },
+    movieTitle: {
+      type: String,
       required: true,
     },
     rating: {
@@ -27,7 +30,7 @@ const ReviewSchema = new mongoose.Schema(
 );
 
 // Jedan korisnik može ostaviti samo jednu recenziju po filmu
-ReviewSchema.index({ user: 1, movie: 1 }, { unique: true });
+ReviewSchema.index({ user: 1, movieAPI: 1 }, { unique: true });
 
 const Review = mongoose.model("Review", ReviewSchema);
 module.exports = Review;
