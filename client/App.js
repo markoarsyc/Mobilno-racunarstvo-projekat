@@ -6,6 +6,7 @@ import RegisterScreen from "./screens/RegisterScreen";
 import LoginScreen from "./screens/LoginScreen";
 
 const Stack = createNativeStackNavigator();
+const apiUrl = "http://192.168.1.5:8000/api";
 
 export default function App() {
   return (
@@ -21,7 +22,7 @@ export default function App() {
             fontWeight: "bold",
             fontSize: 20,
           },
-          headerBackTitle: "Nazad"
+          headerBackTitle: "Nazad",
         }}
       >
         <Stack.Screen
@@ -32,7 +33,8 @@ export default function App() {
         <Stack.Screen
           name="Register"
           component={RegisterScreen}
-          options={{ title: "Registracija" }}
+          options={{ title: "Registracija"}}
+          initialParams={{ apiUrl }}
         />
         <Stack.Screen
           name="Login"
