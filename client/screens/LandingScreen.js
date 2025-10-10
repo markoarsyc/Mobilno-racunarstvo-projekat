@@ -1,7 +1,7 @@
 import { View, Text, Pressable, StyleSheet, StatusBar } from "react-native";
 import React from "react";
 
-export default function LandingPage() {
+export default function LandingScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>🎬 MovieTracker</Text>
@@ -12,6 +12,7 @@ export default function LandingPage() {
             styles.button,
             pressed && styles.buttonPressed,
           ]}
+          onPress={() => navigation.navigate('Register')}
         >
           {({ pressed }) => (
             <Text
@@ -26,6 +27,7 @@ export default function LandingPage() {
             styles.button,
             pressed && styles.buttonPressed,
           ]}
+          onPress={() => navigation.navigate('Login')}
         >
           {({ pressed }) => (
             <Text
