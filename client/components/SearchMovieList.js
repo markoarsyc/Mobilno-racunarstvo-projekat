@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import {
   View,
@@ -12,6 +13,7 @@ import {
 const IMG_URL = "https://image.tmdb.org/t/p/w500";
 
 export default function SearchMovieList({ movies }) {
+  const navigation = useNavigation();
   if (!movies.length) return null;
 
   return (
@@ -19,7 +21,11 @@ export default function SearchMovieList({ movies }) {
       data={movies}
       keyExtractor={(item) => item.id.toString()}
       renderItem={({ item }) => (
-        <TouchableOpacity onPress={()=> console.log(item)}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("Movie", { movieID: item.id});
+          }}
+        >
           <View style={styles.card}>
             {item.poster_path ? (
               <Image

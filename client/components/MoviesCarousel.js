@@ -10,14 +10,16 @@ import {
   ActivityIndicator,
 } from "react-native";
 import axios from "axios";
+import { useNavigation } from "@react-navigation/native";
 
 const { width } = Dimensions.get("window");
 const ITEM_WIDTH = 150; // širina jednog elementa
 
-export default function MoviesCarousel({heading, apiParam}) {
+export default function MoviesCarousel({ heading, apiParam }) {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const navigation = useNavigation();
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -27,7 +29,8 @@ export default function MoviesCarousel({heading, apiParam}) {
           url: `https://api.themoviedb.org/3/movie/${apiParam}?language=en-US&page=1`,
           headers: {
             accept: "application/json",
-            Authorization: "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTYxYzdlMDk2MzFiYWE3YzgxYWNkMDdlODU5MzhiMCIsIm5iZiI6MTc1OTc2MjQwOS4xOTEsInN1YiI6IjY4ZTNkN2U5MDE1MTM0ZDQ1NjYxN2Q1NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.kbFobxXppUO2N0Av_VuU5oECKpvJtk8IVEsitWkIyWY",
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTYxYzdlMDk2MzFiYWE3YzgxYWNkMDdlODU5MzhiMCIsIm5iZiI6MTc1OTc2MjQwOS4xOTEsInN1YiI6IjY4ZTNkN2U5MDE1MTM0ZDQ1NjYxN2Q1NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.kbFobxXppUO2N0Av_VuU5oECKpvJtk8IVEsitWkIyWY",
           },
         };
         const response = await axios.request(options);
@@ -45,7 +48,9 @@ export default function MoviesCarousel({heading, apiParam}) {
   const renderItem = ({ item }) => (
     <TouchableOpacity
       style={styles.itemContainer}
-      onPress={() => console.log(item)}
+      onPress={() => {
+        navigation.navigate("Movie", { movieID: item.id});
+      }}
     >
       <Image
         source={{
@@ -87,11 +92,11 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   heading: {
-    paddingVertical:20,
-    marginLeft:5,
-    color:"#FFD700",
-    fontSize:20,
-    fontWeight:"bold",
+    paddingVertical: 20,
+    marginLeft: 5,
+    color: "#FFD700",
+    fontSize: 20,
+    fontWeight: "bold",
   },
   loadingContainer: {
     flex: 1,
@@ -111,7 +116,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
     fontSize: 14,
     fontWeight: "bold",
-    color:"#fff",
-    textAlign:"center",
+    color: "#fff",
+    textAlign: "center",
   },
 });

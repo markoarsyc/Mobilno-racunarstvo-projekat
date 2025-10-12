@@ -6,6 +6,7 @@ import RegisterScreen from "./screens/RegisterScreen";
 import LoginScreen from "./screens/LoginScreen";
 import { useState } from "react";
 import HomeScreen from "./screens/HomeScreen";
+import MovieDetails from "./components/MovieDetails";
 
 const Stack = createNativeStackNavigator();
 const apiUrl = "http://192.168.1.5:8000/api";
@@ -50,6 +51,11 @@ export default function App() {
           component={HomeScreen}
           options={{ headerShown: false }}
           initialParams={{ apiUrl, loggedInUser, setLoggedInUser }}
+        />
+        <Stack.Screen
+          name="Movie"
+          component={MovieDetails}
+          options={{headerShown:false}}
         />
       </Stack.Navigator>
     </NavigationContainer>
