@@ -1,5 +1,13 @@
 import React from "react";
-import { View, Text, FlatList, Image, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  FlatList,
+  Image,
+  StyleSheet,
+  Touchable,
+  TouchableOpacity,
+} from "react-native";
 
 const IMG_URL = "https://image.tmdb.org/t/p/w500";
 
@@ -11,19 +19,21 @@ export default function SearchMovieList({ movies }) {
       data={movies}
       keyExtractor={(item) => item.id.toString()}
       renderItem={({ item }) => (
-        <View style={styles.card}>
-          {item.poster_path ? (
-            <Image
-              source={{ uri: IMG_URL + item.poster_path }}
-              style={styles.poster}
-            />
-          ) : (
-            <View style={styles.noImage}>
-              <Text style={styles.noImageText}>Nema sliku</Text>
-            </View>
-          )}
-          <Text style={styles.title}>{item.title}</Text>
-        </View>
+        <TouchableOpacity onPress={()=> console.log(item)}>
+          <View style={styles.card}>
+            {item.poster_path ? (
+              <Image
+                source={{ uri: IMG_URL + item.poster_path }}
+                style={styles.poster}
+              />
+            ) : (
+              <View style={styles.noImage}>
+                <Text style={styles.noImageText}>Nema sliku</Text>
+              </View>
+            )}
+            <Text style={styles.title}>{item.title}</Text>
+          </View>
+        </TouchableOpacity>
       )}
     />
   );
