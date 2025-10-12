@@ -7,7 +7,7 @@ import ProfileScreen from "./ProfileScreen";
 const Tab = createBottomTabNavigator();
 
 export default function HomeScreen({ route }) {
-  const { loggedInUser } = route.params;
+  const { loggedInUser, setLoggedInUser } = route.params;
 
   return (
     <Tab.Navigator
@@ -48,8 +48,8 @@ export default function HomeScreen({ route }) {
       <Tab.Screen
         name="Profil"
         component={ProfileScreen}
-        initialParams={{ loggedInUser }}
-        options={{ title: "" }}
+        initialParams={{ loggedInUser, setLoggedInUser }}
+        options={{ title: "Profil" }}
       />
     </Tab.Navigator>
   );

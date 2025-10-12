@@ -49,7 +49,7 @@ export default function App() {
           name="Home"
           component={HomeScreen}
           options={{ headerShown: false }}
-          initialParams={{ apiUrl, loggedInUser }}
+          initialParams={{ apiUrl, loggedInUser, setLoggedInUser }}
         />
       </Stack.Navigator>
     </NavigationContainer>
