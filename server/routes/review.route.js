@@ -7,6 +7,7 @@ router.post("/", reviewController.createReview);
 
 // READ
 router.get("/user/:userId", reviewController.getReviewsByUser);
+router.get("/user/:userId/movie/:movieAPI", reviewController.getReviewByUserAndMovie);
 
 // UPDATE
 router.put("/:id", reviewController.updateReview);
