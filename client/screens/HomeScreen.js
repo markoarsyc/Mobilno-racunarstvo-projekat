@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import HomeTabContent from "./HomeTabContent";
 import ProfileScreen from "./ProfileScreen";
+import SearchScreen from "./SearchScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -33,6 +34,8 @@ export default function HomeScreen({ route }) {
             iconName = "home";
           } else if (route.name === "Profil") {
             iconName = "person";
+          } else if (route.name === "Pretraga") {
+            iconName = "search";
           }
 
           return <Ionicons name={iconName} size={size} color={color} />;
@@ -42,6 +45,12 @@ export default function HomeScreen({ route }) {
       <Tab.Screen
         name="Početna"
         component={HomeTabContent}
+        initialParams={{ loggedInUser }}
+        options={{ headerShown: false }}
+      />
+      <Tab.Screen
+        name="Pretraga"
+        component={SearchScreen}
         initialParams={{ loggedInUser }}
         options={{ headerShown: false }}
       />
