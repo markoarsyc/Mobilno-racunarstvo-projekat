@@ -13,9 +13,10 @@ export default function ProfileScreen({ route }) {
     {
       text: "Da",
       onPress: () => {
+        setLoggedInUser(null);
         navigation.reset({
           index: 0,
-          routes: [{ name: "Login" }],
+          routes: [{ name: "Landing" }],
         });
       },
     },
