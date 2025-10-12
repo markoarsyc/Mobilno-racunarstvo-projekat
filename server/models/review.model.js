@@ -10,10 +10,12 @@ const ReviewSchema = new mongoose.Schema(
     movieAPI: {
       type: Number,
       required: true,
+      unique: true,
     },
     movieTitle: {
       type: String,
       required: true,
+      unique: true,
     },
     rating: {
       type: Number,

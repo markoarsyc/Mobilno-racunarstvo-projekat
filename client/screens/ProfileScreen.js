@@ -10,6 +10,7 @@ import avatar from "../assets/avatar.png";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
+import ReviewList from "../components/ReviewList";
 
 export default function ProfileScreen({ route }) {
   const navigation = useNavigation();
@@ -38,7 +39,7 @@ export default function ProfileScreen({ route }) {
       { text: "Otkaži", style: "cancel" },
       {
         text: "Da",
-        onPress: async() => {
+        onPress: async () => {
           try {
             await api.delete(`users/${loggedInUser._id}`);
             console.log(loggedInUser);
@@ -76,6 +77,15 @@ export default function ProfileScreen({ route }) {
           <Text style={styles.deleteText}>Obriši profil</Text>
         </TouchableOpacity>
       </View>
+      <Text
+        style={[
+          styles.username,
+          { fontWeight: "bold", alignSelf: "flex-start", marginLeft: 25 },
+        ]}
+      >
+        Moje recenzije:
+      </Text>
+      <ReviewList loggedInUser={loggedInUser} apiUrl={apiUrl} />
     </View>
   );
 }
@@ -84,18 +94,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#000",
-    alignItems: "center",
   },
   avatar: {
     width: 150,
     height: 150,
     borderRadius: 50,
     marginBottom: 15,
+    alignSelf: "center",
   },
   username: {
     color: "#fff",
     fontSize: 22,
     marginBottom: 15,
+    alignSelf: "center",
   },
   logoutButton: {
     backgroundColor: "#FFD700",
@@ -125,5 +136,6 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     gap: 5,
+    alignSelf: "center",
   },
 });
