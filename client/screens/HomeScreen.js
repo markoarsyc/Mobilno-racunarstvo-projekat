@@ -1,24 +1,56 @@
-import { View, Text, StyleSheet } from 'react-native'
-import React from 'react'
+import React from "react";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import HomeTabContent from "./HomeTabContent";
+import ProfileScreen from "./ProfileScreen";
 
-export default function HomeScreen({route}) {
-    const {loggedInUser} = route.params;
-    return (
-    <View style={styles.flex}>
-      <Text style={styles.text}>{loggedInUser && loggedInUser.username}</Text>
-    </View>
-  )
+const Tab = createBottomTabNavigator();
+
+export default function HomeScreen({ route }) {
+  const { loggedInUser } = route.params;
+
+  return (
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarStyle: {
+          backgroundColor: "#000",
+          borderTopColor: "#FFD700",
+          borderTopWidth: 1,
+        },
+        tabBarActiveTintColor: "#FFD700",
+        tabBarInactiveTintColor: "#888",
+        headerStyle: {
+          backgroundColor: "#000",
+        },
+        headerTintColor: "#FFD700",
+        headerTitleStyle: {
+          fontWeight: "bold",
+        },
+        tabBarIcon: ({ color, size }) => {
+          let iconName;
+
+          if (route.name === "Početna") {
+            iconName = "home";
+          } else if (route.name === "Profil") {
+            iconName = "person";
+          }
+
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+      })}
+    >
+      <Tab.Screen
+        name="Početna"
+        component={HomeTabContent}
+        initialParams={{ loggedInUser }}
+        options={{ headerShown: false }}
+      />
+      <Tab.Screen
+        name="Profil"
+        component={ProfileScreen}
+        initialParams={{ loggedInUser }}
+        options={{ title: "" }}
+      />
+    </Tab.Navigator>
+  );
 }
-
-const styles = StyleSheet.create({
-  flex: {
-    flex: 1,
-    backgroundColor: "#000",
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  text: {
-    color: "#fff",
-    fontSize: 24,
-  },
-});
