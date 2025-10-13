@@ -25,13 +25,28 @@ export default function MovieDetails({ route }) {
   const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [currentRating, setCurrentRating] = useState(null);
   const apiUrl = useApi();
   const api = axios.create({
     baseURL: apiUrl,
   });
 
+  const handleCurrentReview = async () => {
+    try {
+      const response = await api.get(
+        `reviews/user/${loggedInUser._id}/movie/${movieID}`
+      );
+      setCurrentRating(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    handleCurrentReview();
+  }, []);
+
   const handleRateSubmit = async (data) => {
-    console.log("Ocena poslata:", data);
     const { rating, review } = data;
     const postReview = {
       user: loggedInUser._id,
@@ -42,7 +57,6 @@ export default function MovieDetails({ route }) {
     };
     try {
       await api.post("reviews", postReview);
-      console.log("Uspeh");
       Alert.alert("Uspešno", "Uspešno davanje recenzije", [
         {
           text: "OK",
@@ -55,6 +69,17 @@ export default function MovieDetails({ route }) {
       } else {
         Alert.alert("Greška", "Greška prilikom davanja recenzije");
       }
+    }
+  };
+
+  const handleRateUpdate = async (rating, review) => {
+    try {
+      await api.put(`reviews/${currentRating._id}`, { rating, review });
+      Alert.alert("Uspešno", "Recenzija izmenjena");
+      await handleCurrentReview(); // osvezi podatke
+    } catch (error) {
+      console.error("Greška pri ažuriranju recenzije:", error);
+      Alert.alert("Greška", "Došlo je do greške pri ažuriranju recenzije.");
     }
   };
 
@@ -150,26 +175,73 @@ export default function MovieDetails({ route }) {
         <Text style={styles.sectionTitle}>Originalni opis:</Text>
         <Text style={styles.overview}>{movie.overview}</Text>
       </View>
-      <TouchableOpacity
-        style={{
-          backgroundColor: "#FFD700",
-          margin: 20,
-          paddingVertical: 12,
-          marginBottom: 50,
-          borderRadius: 8,
-          alignItems: "center",
-        }}
-        onPress={() => setIsModalVisible(true)}
-      >
-        <Text style={{ color: "#000", fontSize: 18, fontWeight: "bold" }}>
-          Oceni film
-        </Text>
-      </TouchableOpacity>
+      <View style={{ margin: 20 }}>
+        {currentRating ? (
+          <View
+            style={{
+              backgroundColor: "#1c1c1c",
+              borderRadius: 10,
+              padding: 15,
+              marginBottom: 20,
+            }}
+          >
+            <Text
+              style={{ color: "#FFD700", fontSize: 18, fontWeight: "bold" }}
+            >
+              Tvoja ocena: {currentRating.rating}/10
+            </Text>
+            <Text style={{ color: "#ccc", marginVertical: 10 }}>
+              {currentRating.review}
+            </Text>
+
+            <TouchableOpacity
+              style={{
+                backgroundColor: "#FFD700",
+                paddingVertical: 10,
+                borderRadius: 8,
+                alignItems: "center",
+              }}
+              onPress={() => setIsModalVisible(true)}
+            >
+              <Text style={{ color: "#000", fontSize: 16, fontWeight: "bold" }}>
+                Izmeni recenziju
+              </Text>
+            </TouchableOpacity>
+          </View>
+        ) : (
+          <TouchableOpacity
+            style={{
+              backgroundColor: "#FFD700",
+              marginTop: 20,
+              paddingVertical: 12,
+              borderRadius: 8,
+              alignItems: "center",
+            }}
+            onPress={() => setIsModalVisible(true)}
+          >
+            <Text style={{ color: "#000", fontSize: 18, fontWeight: "bold" }}>
+              Oceni film
+            </Text>
+          </TouchableOpacity>
+        )}
+      </View>
 
       <RateMovieModal
         visible={isModalVisible}
         onClose={() => setIsModalVisible(false)}
-        onSubmit={handleRateSubmit}
+        onSubmit={async (data) => {
+          const { rating, review } = data;
+
+          if (currentRating) {
+            await handleRateUpdate(rating, review);
+          } else {
+            await handleRateSubmit(data);
+            handleCurrentReview();
+          }
+        }}
+        initialRating={currentRating?.rating}
+        initialReview={currentRating?.review}
+        isEditing={!!currentRating}
       />
     </ScrollView>
   );

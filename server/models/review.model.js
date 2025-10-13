@@ -15,7 +15,6 @@ const ReviewSchema = new mongoose.Schema(
     movieTitle: {
       type: String,
       required: true,
-      unique: true,
     },
     rating: {
       type: Number,

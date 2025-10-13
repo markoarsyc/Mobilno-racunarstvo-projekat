@@ -33,7 +33,6 @@ export default function RegisterScreen() {
       password,
     };
     try {
-      console.log(newUser);
       await api.post("users", newUser);
       Alert.alert("Uspešno", "Uspešno ste se registrovali", [
         {

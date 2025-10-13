@@ -30,7 +30,6 @@ export default function ReviewList({ loggedInUser}) {
   const handleDeleteReview = async (id)=> {
     try {
       await api.delete(`reviews/${id}`);
-      console.log("Uspesno izbrisana ocena");
     } catch (error) {
       console.log(error);
     }
@@ -46,6 +45,7 @@ export default function ReviewList({ loggedInUser}) {
         <Text style={styles.title}>{item.movieTitle}</Text>
         <Text style={styles.rating}>Ocena: {item.rating}/10</Text>
         <Text style={styles.comment}>{item.review}</Text>
+        <Text style={styles.date}>{new Date(item.updatedAt).toLocaleDateString("sr-RS")}</Text>
       </View>
       <TouchableOpacity onPress={() => handleDeleteReview(item._id)}>
         <Ionicons name="trash-outline" size={24} color="#ff4444" />
@@ -91,6 +91,10 @@ const styles = StyleSheet.create({
   rating: {
     color: "#fff",
     marginTop: 5,
+  },
+  date: {
+    color: "#aaa",
+    marginTop:5,
   },
   comment: {
     color: "#ccc",

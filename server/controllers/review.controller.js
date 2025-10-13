@@ -56,7 +56,9 @@ const reviewController = {
   // Ucitavanje svih recenzija određenog korisnika
   async getReviewsByUser(req, res) {
     try {
-      const reviews = await Review.find({ user: req.params.userId });
+      const reviews = await Review.find({ user: req.params.userId }).sort({
+        updatedAt: -1,
+      });
       res.json(reviews);
     } catch (error) {
       res
@@ -78,8 +80,8 @@ const reviewController = {
 
       const review = await Review.findOne({
         user: userId,
-        movieAPI:movieAPI,
-      })
+        movieAPI: movieAPI,
+      });
 
       if (!review) {
         return res.status(404).json({ message: "Review not found" });

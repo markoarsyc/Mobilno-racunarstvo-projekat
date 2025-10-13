@@ -44,7 +44,6 @@ export default function ProfileScreen({ route }) {
         onPress: async () => {
           try {
             await api.delete(`users/${loggedInUser._id}`);
-            console.log(loggedInUser);
             Alert.alert("Uspešno", "Profil uspešno izbrisan", [
               {
                 text: "OK",

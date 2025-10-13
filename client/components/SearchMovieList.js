@@ -12,7 +12,7 @@ import {
 
 const IMG_URL = "https://image.tmdb.org/t/p/w500";
 
-export default function SearchMovieList({ movies }) {
+export default function SearchMovieList({ movies, loggedInUser }) {
   const navigation = useNavigation();
   if (!movies.length) return null;
 
@@ -23,7 +23,7 @@ export default function SearchMovieList({ movies }) {
       renderItem={({ item }) => (
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate("Movie", { movieID: item.id});
+            navigation.navigate("Movie", { movieID: item.id, loggedInUser});
           }}
         >
           <View style={styles.card}>

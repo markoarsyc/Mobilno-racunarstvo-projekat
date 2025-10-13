@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -9,27 +9,38 @@ import {
 } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-export default function RateMovieModal({ visible, onClose, onSubmit }) {
-  const [rating, setRating] = useState(0);
-  const [review, setReview] = useState("");
+export default function RateMovieModal({
+  visible,
+  onClose,
+  onSubmit,
+  initialRating = 0,
+  initialReview = "",
+  isEditing = false,
+}) {
+  const [rating, setRating] = useState(initialRating);
+  const [review, setReview] = useState(initialReview);
 
-  const handleRate = (value) => {
-    setRating(value);
-  };
+  // Kada se modal otvori, popuni vrednosti iz props
+  useEffect(() => {
+    if (visible) {
+      setRating(initialRating);
+      setReview(initialReview);
+    }
+  }, [visible, initialRating, initialReview]);
+
+  const handleRate = (value) => setRating(value);
 
   const handleSubmit = async () => {
-  try {
-    await onSubmit({ rating, review });
-    setRating(0);
-    setReview("");
-    onClose();
-  } catch (error) {
-    console.error("Greška prilikom slanja ocene:", error);
-  }
-};
+    try {
+      await onSubmit({ rating, review });
+      setRating(0);
+      setReview("");
+      onClose();
+    } catch (error) {
+      console.error("Greška prilikom slanja ocene:", error);
+    }
+  };
 
-
-  // Podelimo 10 zvezdica na 2 reda
   const starsRows = [
     [1, 2, 3, 4, 5],
     [6, 7, 8, 9, 10],
@@ -39,7 +50,9 @@ export default function RateMovieModal({ visible, onClose, onSubmit }) {
     <Modal visible={visible} transparent animationType="fade">
       <View style={styles.overlay}>
         <View style={styles.modalContainer}>
-          <Text style={styles.title}>Oceni film</Text>
+          <Text style={styles.title}>
+            {isEditing ? "Izmeni recenziju" : "Oceni film"}
+          </Text>
 
           {starsRows.map((row, rowIndex) => (
             <View key={rowIndex} style={styles.starRow}>
@@ -70,11 +83,13 @@ export default function RateMovieModal({ visible, onClose, onSubmit }) {
 
           <View style={styles.buttons}>
             <TouchableOpacity style={styles.cancelBtn} onPress={onClose}>
-              <Text style={[styles.btnText, {color:"#fff"}]}>Otkaži</Text>
+              <Text style={[styles.btnText, { color: "#fff" }]}>Otkaži</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.submitBtn} onPress={handleSubmit}>
-              <Text style={styles.btnText}>Oceni</Text>
+              <Text style={styles.btnText}>
+                {isEditing ? "Sačuvaj izmene" : "Oceni"}
+              </Text>
             </TouchableOpacity>
           </View>
         </View>

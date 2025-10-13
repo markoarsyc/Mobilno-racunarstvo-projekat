@@ -6,7 +6,8 @@ import SearchMovieList from "../components/SearchMovieList";
 const API_KEY = "3a61c7e09631baa7c81acd07e85938b0";
 const AUTH_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTYxYzdlMDk2MzFiYWE3YzgxYWNkMDdlODU5MzhiMCIsIm5iZiI6MTc1OTc2MjQwOS4xOTEsInN1YiI6IjY4ZTNkN2U5MDE1MTM0ZDQ1NjYxN2Q1NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.kbFobxXppUO2N0Av_VuU5oECKpvJtk8IVEsitWkIyWY";
 
-export default function SearchScreen() {
+export default function SearchScreen({route}) {
+  const {loggedInUser} = route.params;
   const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -60,7 +61,7 @@ export default function SearchScreen() {
       {loading ? (
         <ActivityIndicator size="large" color="#fff" style={{ marginTop: 20 }} />
       ) : (
-        <SearchMovieList movies={movies} />
+        <SearchMovieList movies={movies} loggedInUser={loggedInUser}/>
       )}
     </View>
   );

@@ -28,7 +28,6 @@ export default function LoginScreen({ route }) {
 
   const handleLogin = async () => {
     const userCredentials = {username,password};
-    console.log(userCredentials);
     try {
       const response = await api.post("users/login", userCredentials);
       setLoggedInUser(response.data);
