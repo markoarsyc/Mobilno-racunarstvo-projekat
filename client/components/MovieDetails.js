@@ -8,24 +8,60 @@ import {
   Dimensions,
   ActivityIndicator,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import axios from "axios";
 import { LinearGradient } from "expo-linear-gradient";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
+import RateMovieModal from "./RateMovieModal";
+import { useApi } from "../contexts/ApiContext";
 
 const { width } = Dimensions.get("window");
 const IMAGE_HEIGHT = 550;
 
 export default function MovieDetails({ route }) {
-  const { movieID } = route.params;
+  const { movieID, loggedInUser } = route.params;
   const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const apiUrl = useApi();
+  const api = axios.create({
+    baseURL: apiUrl,
+  });
+
+  const handleRateSubmit = async (data) => {
+    console.log("Ocena poslata:", data);
+    const { rating, review } = data;
+    const postReview = {
+      user: loggedInUser._id,
+      movieAPI: movieID,
+      movieTitle: movie.title,
+      rating,
+      review,
+    };
+    try {
+      await api.post("reviews", postReview);
+      console.log("Uspeh");
+      Alert.alert("Uspešno", "Uspešno davanje recenzije", [
+        {
+          text: "OK",
+          onPress: () => setIsModalVisible(false),
+        },
+      ]);
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        Alert.alert("Greška", "Greška prilikom davanja recenzije");
+      } else {
+        Alert.alert("Greška", "Greška prilikom davanja recenzije");
+      }
+    }
+  };
+
   const navigation = useNavigation();
 
   useEffect(() => {
     const fetchMovie = async () => {
-      console.log(movieID);
       try {
         const options = {
           method: "GET",
@@ -114,6 +150,27 @@ export default function MovieDetails({ route }) {
         <Text style={styles.sectionTitle}>Originalni opis:</Text>
         <Text style={styles.overview}>{movie.overview}</Text>
       </View>
+      <TouchableOpacity
+        style={{
+          backgroundColor: "#FFD700",
+          margin: 20,
+          paddingVertical: 12,
+          marginBottom: 50,
+          borderRadius: 8,
+          alignItems: "center",
+        }}
+        onPress={() => setIsModalVisible(true)}
+      >
+        <Text style={{ color: "#000", fontSize: 18, fontWeight: "bold" }}>
+          Oceni film
+        </Text>
+      </TouchableOpacity>
+
+      <RateMovieModal
+        visible={isModalVisible}
+        onClose={() => setIsModalVisible(false)}
+        onSubmit={handleRateSubmit}
+      />
     </ScrollView>
   );
 }

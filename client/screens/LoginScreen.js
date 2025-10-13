@@ -13,10 +13,12 @@ import {
   Keyboard,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { useApi } from "../contexts/ApiContext";
 
 export default function LoginScreen({ route }) {
   const navigation = useNavigation();
-  const { apiUrl, setLoggedInUser } = route.params;
+  const {setLoggedInUser } = route.params;
+  const apiUrl = useApi();
   const api = axios.create({
     baseURL: apiUrl,
   });

@@ -11,10 +11,12 @@ import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import ReviewList from "../components/ReviewList";
+import { useApi } from "../contexts/ApiContext";
 
 export default function ProfileScreen({ route }) {
   const navigation = useNavigation();
-  const { loggedInUser, setLoggedInUser, apiUrl } = route.params;
+  const { loggedInUser, setLoggedInUser} = route.params;
+  const apiUrl = useApi();
   const api = axios.create({
     baseURL: apiUrl,
   });
@@ -85,7 +87,7 @@ export default function ProfileScreen({ route }) {
       >
         Moje recenzije:
       </Text>
-      <ReviewList loggedInUser={loggedInUser} apiUrl={apiUrl} />
+      <ReviewList loggedInUser={loggedInUser}/>
     </View>
   );
 }

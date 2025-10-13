@@ -8,9 +8,11 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import axios from "axios";
+import { useApi } from "../contexts/ApiContext";
 
-export default function ReviewList({ loggedInUser, apiUrl }) {
+export default function ReviewList({ loggedInUser}) {
   const [ratings, setRatings] = useState([]);
+  const apiUrl = useApi();
 
   const api = axios.create({
     baseURL: apiUrl,

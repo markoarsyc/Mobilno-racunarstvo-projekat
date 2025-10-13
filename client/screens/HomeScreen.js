@@ -8,7 +8,7 @@ import SearchScreen from "./SearchScreen";
 const Tab = createBottomTabNavigator();
 
 export default function HomeScreen({ route }) {
-  const { loggedInUser, setLoggedInUser, apiUrl } = route.params;
+  const { loggedInUser, setLoggedInUser} = route.params;
 
   return (
     <Tab.Navigator
@@ -45,7 +45,7 @@ export default function HomeScreen({ route }) {
       <Tab.Screen
         name="Početna"
         component={HomeTabContent}
-        initialParams={{ loggedInUser }}
+        initialParams={{ loggedInUser}}
         options={{ headerShown: false }}
       />
       <Tab.Screen
@@ -57,7 +57,7 @@ export default function HomeScreen({ route }) {
       <Tab.Screen
         name="Profil"
         component={ProfileScreen}
-        initialParams={{ loggedInUser, setLoggedInUser, apiUrl }}
+        initialParams={{ loggedInUser, setLoggedInUser}}
         options={{ title: "Profil" }}
       />
     </Tab.Navigator>

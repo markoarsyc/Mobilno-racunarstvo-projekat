@@ -13,10 +13,11 @@ import {
   Keyboard,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { useApi } from "../contexts/ApiContext";
 
-export default function RegisterScreen({ route }) {
+export default function RegisterScreen() {
   const navigation = useNavigation();
-  const { apiUrl } = route.params;
+  const apiUrl = useApi();
   const api = axios.create({
     baseURL: apiUrl,
   });

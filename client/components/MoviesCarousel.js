@@ -15,7 +15,7 @@ import { useNavigation } from "@react-navigation/native";
 const { width } = Dimensions.get("window");
 const ITEM_WIDTH = 150; // širina jednog elementa
 
-export default function MoviesCarousel({ heading, apiParam }) {
+export default function MoviesCarousel({ heading, apiParam, loggedInUser}) {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -49,7 +49,7 @@ export default function MoviesCarousel({ heading, apiParam }) {
     <TouchableOpacity
       style={styles.itemContainer}
       onPress={() => {
-        navigation.navigate("Movie", { movieID: item.id});
+        navigation.navigate("Movie", { movieID: item.id, loggedInUser});
       }}
     >
       <Image
