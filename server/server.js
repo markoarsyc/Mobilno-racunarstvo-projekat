@@ -16,7 +16,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/reviews", reviewRoutes);
 
 
-mongoose.connect('mongodb+srv://kaca_marko:zktzkwXMHagzWAht@imdbclone.hygdsdr.mongodb.net/?retryWrites=true&w=majority&appName=IMDBClone')
+mongoose.connect('mongodb+srv://katarina_nikolic:movieAppAdmin@movieappdata.qmjba3q.mongodb.net/?appName=MovieAppData')
   .then(() => {
     console.log('Connected!');
     app.listen(port, ()=>{
@@ -27,3 +27,5 @@ mongoose.connect('mongodb+srv://kaca_marko:zktzkwXMHagzWAht@imdbclone.hygdsdr.mo
   .catch((e)=> {
     console.log("Connection failed! "+e);
   })
+
+
