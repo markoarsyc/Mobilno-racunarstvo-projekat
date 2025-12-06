@@ -5,7 +5,7 @@ const ApiContext = createContext();
 
 // Provider komponenta — ovde se definiše vrednost koju delimo
 export const ApiProvider = ({ children }) => {
-  const apiUrl = "http://192.168.1.5:8000/api";
+  const apiUrl = "http://192.168.1.6:8000/api";
 
   return (
     <ApiContext.Provider value={apiUrl}>
