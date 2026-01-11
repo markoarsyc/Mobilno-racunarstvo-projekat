@@ -1,0 +1,18 @@
+<div class="reviews-container">
+  <h2>Korisničke recenzije</h2>
+
+  @if (reviewList().length > 0) {
+    @for (review of reviewList(); track review._id) {
+      <div class="review-card">
+        <h3 class="movie-title">{{ review.movieTitle }}</h3>
+        <p class="rating">⭐ Ocena: {{ review.rating }}/10</p>
+        <p class="review-text">{{ review.review }}</p>
+        <p class="review-date">
+          Datum: {{ review.createdAt | date:'medium' }}
+        </p>
+      </div>
+    }
+  } @else {
+    <p>Nema dostupnih recenzija.</p>
+  }
+</div>

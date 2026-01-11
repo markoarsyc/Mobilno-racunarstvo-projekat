@@ -30,8 +30,9 @@ export class Login {
         console.log("Login successful:", res);
         this.errorMessage.set(null);
         const user = res as User;
-        const {username, email} = user;
-        this.auth.login({username, email});
+        const {_id, username, email} = user;
+        console.log("Logging in user:", {_id, username, email});
+        this.auth.login({_id, username, email});
         this.router.navigate(['/home']);
       },
       error: (err) => {

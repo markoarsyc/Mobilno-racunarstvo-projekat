@@ -4,12 +4,12 @@
     <div class="profile-card">
       <h2>{{ user()?.username }}</h2>
       <p><strong>Email:</strong> {{ user()?.email }}</p>
-
       <div class="profile-actions">
         <button class="logout-button" (click)="logout()">Odjava</button>
         <button class="delete-button">Obriši profil</button>
       </div>
     </div>
+    <app-reviews-list></app-reviews-list>
   } @else {
     <!-- Nije ulogovan -->
     <div class="not-logged-in">

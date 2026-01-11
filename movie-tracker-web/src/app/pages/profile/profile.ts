@@ -2,11 +2,12 @@ import { Component, inject, signal } from '@angular/core';
 import { User } from '../../interfaces/user';
 import { AuthService } from '../../services/auth-service';
 import { RouterLink } from '@angular/router';
+import { ReviewsList } from "../../components/reviews-list/reviews-list";
 
 
 @Component({
   selector: 'app-profile',
-  imports: [RouterLink],
+  imports: [RouterLink, ReviewsList],
   templateUrl: './profile.html',
   styleUrl: './profile.scss',
 })

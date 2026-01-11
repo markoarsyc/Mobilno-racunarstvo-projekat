@@ -1,12 +1,13 @@
 .profile-container {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column; /* vertikalno slažemo profil i recenzije */
+  align-items: center;
   min-height: 80vh;
   padding: 40px 20px;
   background-color: #121212;
   color: #fff;
   font-family: Arial, sans-serif;
+  gap: 10px; /* razmak između profila i liste recenzija */
 }
 
 .profile-card {
@@ -44,7 +45,7 @@
     }
 
     .logout-button {
-      background-color: #FFD700; // žuta
+      background-color: #FFD700;
       color: #000;
 
       &:hover {
@@ -53,7 +54,7 @@
     }
 
     .delete-button {
-      background-color: #ff4d4f; // crvena
+      background-color: #ff4d4f;
       color: #fff;
 
       &:hover {
@@ -87,13 +88,18 @@
 }
 
 /* RESPONSIVE */
-@media (max-width: 500px) {
-  .profile-card {
+@media (max-width: 768px) {
+  .profile-card, .reviews-list {
+    width: 100%;
     padding: 20px;
   }
 
   .profile-actions {
     flex-direction: column;
     gap: 10px;
+  }
+
+  .review-card {
+    padding: 15px;
   }
 }
