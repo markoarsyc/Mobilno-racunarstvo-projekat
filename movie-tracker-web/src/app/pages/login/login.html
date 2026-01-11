@@ -1,0 +1,16 @@
+<div class="login-container">
+    <form [formGroup]="loginForm" (submit)="submitLoginForm()" class="login-form">
+        <input type="text" placeholder="Korisničko ime" formControlName="username" />
+
+        <input type="password" placeholder="Lozinka" formControlName="password" />
+
+        <button type="submit" class="login-button">
+            Prijavi se
+        </button>
+        @if(errorMessage()) {
+        <div class="error-message">
+            {{ errorMessage() }}
+        </div>
+        }
+    </form>
+</div>

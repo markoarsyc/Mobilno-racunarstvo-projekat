@@ -1,0 +1,183 @@
+/* =========================
+   CSS RESET & BASE
+========================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Inter', 'Roboto', system-ui, -apple-system, sans-serif;
+  background-color: #0d0d0d; /* RN background */
+  color: #f5f5f5;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* =========================
+   LAYOUT
+========================= */
+
+header {
+  background-color: #0d0d0d;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #ffd700;
+}
+
+header h1 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #ffd700;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+}
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+/* =========================
+   LINKS & BUTTONS
+========================= */
+
+a {
+  color: #ffd700;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+a:hover {
+  cursor:pointer
+}
+
+button {
+  background-color: #1a1a1a;
+  color: #ffd700;
+  border: 2px solid #ffd700;
+  border-radius: 25px;
+  padding: 0.7rem 1.8rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.1s ease,
+    box-shadow 0.2s ease;
+}
+
+button:hover {
+  background-color: #ffd700;
+  color: #000;
+}
+
+button:active {
+  transform: scale(0.97);
+  box-shadow: 0 2px 6px rgba(255, 215, 0, 0.4);
+}
+
+button.secondary {
+  background-color: transparent;
+  border-color: #666;
+  color: #ccc;
+}
+
+/* =========================
+   FORMS (Login / Register)
+========================= */
+
+input,
+select,
+textarea {
+  width: 100%;
+  background-color: #1a1a1a;
+  border: 2px solid #333;
+  border-radius: 12px;
+  padding: 0.7rem 0.9rem;
+  color: #f5f5f5;
+  font-size: 0.95rem;
+}
+
+input::placeholder {
+  color: #999;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #ffd700;
+  box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
+}
+
+/* =========================
+   CARDS (Movies, Search)
+========================= */
+
+.card {
+  background-color: #1a1a1a;
+  border: 2px solid #333;
+  border-radius: 16px;
+  padding: 1rem;
+
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: #ffd700;
+  box-shadow: 0 12px 30px rgba(255, 215, 0, 0.25);
+}
+
+/* =========================
+   UTILITIES
+========================= */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+  main {
+    padding: 1rem;
+  }
+
+  header h1 {
+    font-size: 1.2rem;
+  }
+}

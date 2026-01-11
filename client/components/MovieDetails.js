@@ -57,7 +57,7 @@ export default function MovieDetails({ route }) {
     };
     try {
       await api.post("reviews", postReview);
-      Alert.alert("Uspešno", "Uspešno davanje recenzije", [
+      Alert.alert("Uspešno davanje recenzije", "Vaša ocena je privatna i ne utiče na prosečnu ocenu filma", [
         {
           text: "OK",
           onPress: () => setIsModalVisible(false),
@@ -169,7 +169,7 @@ export default function MovieDetails({ route }) {
         ) : null}
 
         <Text style={styles.info}>
-          ⭐ Ocena: {movie.vote_average} ({movie.vote_count} glasova)
+          ⭐ Ocena: {movie.vote_average} ({movie.vote_count} javnih glasova sa sajta TMDB)
         </Text>
 
         <Text style={styles.sectionTitle}>Originalni opis:</Text>

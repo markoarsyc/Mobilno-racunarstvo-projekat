@@ -1,0 +1,32 @@
+<!-- Back button -->
+<button class="back-button" (click)="goBack()"><</button>
+    <div class="movie-detail-container">
+      <!-- Movie layout: poster left, info right -->
+      <div class="movie-main">
+        <!-- Poster -->
+        <div class="poster-section">
+          <img class="poster-img" [src]="'https://image.tmdb.org/t/p/w500' + movie()?.poster_path"
+            alt="{{ movie()?.title }}" />
+        </div>
+
+        <!-- Info section -->
+        <div class="movie-info">
+          <h1 class="movie-title">{{ movie()?.title }}</h1>
+          <p class="movie-subtitle">
+            {{ releaseYear() }} • {{ genres() }} • {{ runtime() }}
+          </p>
+
+          @if (movie()?.tagline) {
+          <p class="tagline">"{{ movie()?.tagline }}"</p>
+          }
+
+          <p class="rating-info">
+            ⭐ Ocena sa javnog API-ja: {{ movie()?.vote_average }}
+            ({{ movie()?.vote_count }} glasova)
+          </p>
+
+          <h3 class="section-title">Originalni opis:</h3>
+          <p class="overview">{{ movie()?.overview }}</p>
+        </div>
+      </div>
+    </div>

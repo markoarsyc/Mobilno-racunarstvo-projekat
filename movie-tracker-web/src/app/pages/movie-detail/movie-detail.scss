@@ -1,0 +1,136 @@
+.movie-detail-container {
+  background-color: #000;
+  min-height: 100vh;
+  padding: 20px;
+  color: #fff;
+  position: relative;
+}
+
+/* =========================
+   BACK BUTTON
+========================= */
+.back-button {
+  position: absolute; /* fixed da ostane uvek na ekranu */
+  top: 100px; /* malo niže od vrha */
+  left: 10px; /* skroz levo uz ekran */
+  z-index: 10;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: rgba(0, 0, 0, 0.6);
+  border: none;
+  border-radius: 50%;
+
+  width: 48px;
+  height: 48px;
+
+  color: #FFD700; /* žuta strelica */
+  font-size: 2rem;
+  font-weight: 700;
+  cursor: pointer;
+
+  /* malo odmak od leve ivice da ne dodiruje potpuno ekran */
+  margin-left: 10px;
+
+  /* opcionalno: hover efekat da strelica svetli */
+  transition: transform 0.2s ease, background-color 0.2s ease;
+
+  &:hover {
+    transform: scale(1.1);
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+}
+
+
+/* =========================
+   MAIN MOVIE LAYOUT
+========================= */
+.movie-main {
+  display: flex;
+  gap: 20px; /* razmak između poster-a i info-a */
+  align-items: flex-start;
+  margin-top: 10px; /* da nije ispod back button-a */
+  padding: 20px;
+}
+
+/* =========================
+   POSTER
+========================= */
+.poster-section {
+  flex: 0 0 250px; /* fiksna širina poster-a */
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.poster-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* =========================
+   INFO SECTION
+========================= */
+.movie-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.movie-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.movie-subtitle {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: #ccc;
+}
+
+.tagline {
+  font-style: italic;
+  color: #aaa;
+  margin-bottom: 10px;
+}
+
+.rating-info {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.section-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+.overview {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+  .movie-main {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .poster-section {
+    width: 100%;
+    max-height: 400px;
+  }
+
+  .movie-title {
+    font-size: 1.5rem;
+  }
+}

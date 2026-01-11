@@ -1,0 +1,13 @@
+<div class="register-container">
+    <form [formGroup]="registerForm" (submit)="submitRegisterForm()" class="register-form">
+        <input type="text" placeholder="Korisničko ime" formControlName="username" />
+
+        <input type="email" placeholder="Email" formControlName="email" />
+
+        <input type="password" placeholder="Lozinka" formControlName="password" />
+
+        <button type="submit" class="register-button">
+            Registruj se
+        </button>
+    </form>
+</div>
