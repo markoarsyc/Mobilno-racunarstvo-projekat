@@ -2,6 +2,8 @@ import { Component, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from '../../services/user-service';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth-service';
+import { User } from '../../interfaces/user';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +19,7 @@ export class Login {
 
   errorMessage = signal<string | null>(null);
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private auth: AuthService, private router: Router) { }
 
   submitLoginForm() {
     const username = this.loginForm.get('username')?.value || '';
@@ -27,6 +29,9 @@ export class Login {
       next: (res) => {
         console.log("Login successful:", res);
         this.errorMessage.set(null);
+        const user = res as User;
+        const {username, email} = user;
+        this.auth.login({username, email});
         this.router.navigate(['/home']);
       },
       error: (err) => {
