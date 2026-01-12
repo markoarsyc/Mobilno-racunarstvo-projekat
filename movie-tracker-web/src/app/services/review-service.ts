@@ -15,4 +15,10 @@ export class ReviewService {
     const url = `${this.baseUrl}/user/${userId}`;
     return this.http.get<Review[]>(url);
   }
+
+  // POST – kreiranje nove recenzije
+  createReview(review: Review): Observable<Review> {
+    return this.http.post<Review>(this.baseUrl, review);
+  }
+
 }

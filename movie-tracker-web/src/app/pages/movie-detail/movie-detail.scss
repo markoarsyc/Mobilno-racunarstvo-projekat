@@ -134,3 +134,27 @@
     font-size: 1.5rem;
   }
 }
+
+/* =========================
+   RATE MOVIE SECTION
+========================= */
+.rate-movie-section {
+  margin-top: 40px;
+  padding: 20px;
+
+  display: flex;
+  justify-content: center;
+}
+
+/* Ograničimo širinu da izgleda uredno na velikim ekranima */
+.rate-movie-section app-rate-movie {
+  width: 100%;
+  max-width: 600px;
+}
+
+.login-message {
+  color: #ffcc00;
+  font-size: 1.2rem;
+  text-align: center;
+  background-color: #181818;
+}

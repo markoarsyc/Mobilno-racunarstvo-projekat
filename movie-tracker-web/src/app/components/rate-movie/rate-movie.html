@@ -1,0 +1,36 @@
+<div class="rate-movie-container">
+  <h2 class="title">Oceni film</h2>
+
+  <form [formGroup]="rateForm" (submit)="submit()">
+
+    <!-- STARS -->
+    <div class="stars">
+      @for (star of [10,9,8,7,6,5,4,3,2,1]; track star) {
+        <input
+          type="radio"
+          [id]="'star' + star"
+          formControlName="rating"
+          [value]="star"
+        />
+        <label
+          [for]="'star' + star"
+          [title]="star"
+        ></label>
+      }
+    </div>
+
+    <!-- COMMENT -->
+    <textarea
+      class="comment-input"
+      placeholder="Napiši svoj komentar o filmu..."
+      rows="4"
+      formControlName="review"
+    ></textarea>
+
+    <!-- SUBMIT -->
+    <button class="submit-btn" type="submit">
+      Pošalji ocenu
+    </button>
+
+  </form>
+</div>

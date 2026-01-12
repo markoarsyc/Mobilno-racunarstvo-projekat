@@ -1,0 +1,115 @@
+.rate-movie-container {
+  background-color: #1c1c1c;
+  border-radius: 12px;
+  padding: 25px 20px;
+  margin: 30px auto;
+  max-width: 500px;
+  text-align: center;
+
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+}
+
+.title {
+  color: #fff;
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+/* ⭐ Stars wrapper */
+.stars {
+  display: inline-flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+}
+
+/* Hide radio buttons */
+.stars input {
+  display: none;
+}
+
+/* Star labels */
+.stars label {
+  font-size: 36px;
+  color: #444;
+  cursor: pointer;
+  margin: 0 4px;
+  transition: color 0.2s ease, transform 0.15s ease;
+}
+
+/* Default star */
+.stars label::before {
+  content: "★";
+}
+
+/* Hover effect */
+.stars label:hover,
+.stars label:hover ~ label {
+  color: #ffd700;
+  transform: scale(1.15);
+}
+
+/* Selected stars */
+.stars input:checked ~ label {
+  color: #ffd700;
+}
+
+/* Small helper text */
+.hint {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #aaa;
+}
+
+.comment-input {
+  width: 100%;
+  margin-top: 18px;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  resize: vertical;
+
+  background-color: #2a2a2a;
+  color: #fff;
+  font-size: 15px;
+  line-height: 1.4;
+
+  outline: none;
+
+  &::placeholder {
+    color: #aaa;
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.4);
+  }
+}
+
+.submit-btn {
+  width: 100%;
+  margin-top: 15px;
+  padding: 12px 0;
+
+  background-color: #ffd700;
+  color: #000;
+  font-size: 16px;
+  font-weight: bold;
+
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+
+  transition: background-color 0.2s ease, transform 0.15s ease,
+    box-shadow 0.15s ease;
+
+  &:hover {
+    background-color: #ffcc00;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 14px rgba(255, 215, 0, 0.4);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+}

@@ -1,32 +1,48 @@
 <!-- Back button -->
-<button class="back-button" (click)="goBack()"><</button>
-    <div class="movie-detail-container">
-      <!-- Movie layout: poster left, info right -->
-      <div class="movie-main">
-        <!-- Poster -->
-        <div class="poster-section">
-          <img class="poster-img" [src]="'https://image.tmdb.org/t/p/w500' + movie()?.poster_path"
-            alt="{{ movie()?.title }}" />
-        </div>
+<button class="back-button" (click)="goBack()">
+  &lt;
+</button>
 
-        <!-- Info section -->
-        <div class="movie-info">
-          <h1 class="movie-title">{{ movie()?.title }}</h1>
-          <p class="movie-subtitle">
-            {{ releaseYear() }} • {{ genres() }} • {{ runtime() }}
-          </p>
-
-          @if (movie()?.tagline) {
-          <p class="tagline">"{{ movie()?.tagline }}"</p>
-          }
-
-          <p class="rating-info">
-            ⭐ Ocena sa javnog API-ja: {{ movie()?.vote_average }}
-            ({{ movie()?.vote_count }} glasova)
-          </p>
-
-          <h3 class="section-title">Originalni opis:</h3>
-          <p class="overview">{{ movie()?.overview }}</p>
-        </div>
-      </div>
+<div class="movie-detail-container">
+  <!-- Movie layout: poster left, info right -->
+  <div class="movie-main">
+    <!-- Poster -->
+    <div class="poster-section">
+      <img class="poster-img" [src]="'https://image.tmdb.org/t/p/w500' + movie()?.poster_path"
+        alt="{{ movie()?.title }}" />
     </div>
+
+    <!-- Info section -->
+    <div class="movie-info">
+      <h1 class="movie-title">{{ movie()?.title }}</h1>
+
+      <p class="movie-subtitle">
+        {{ releaseYear() }} • {{ genres() }} • {{ runtime() }}
+      </p>
+
+      @if (movie()?.tagline) {
+      <p class="tagline">"{{ movie()?.tagline }}"</p>
+      }
+
+      <p class="rating-info">
+        ⭐ Javna ocena sa sajta TMDB: {{ movie()?.vote_average }}
+        ({{ movie()?.vote_count }} glasova)
+      </p>
+
+      <h3 class="section-title">Originalni opis:</h3>
+      <p class="overview">{{ movie()?.overview }}</p>
+    </div>
+  </div>
+
+  <!-- RATE MOVIE SECTION -->
+
+  <div class="rate-movie-section">
+    @if (movie() && authService.user()) {
+    <app-rate-movie [movie]="movie()!"></app-rate-movie>
+    }@else {
+    <p class="login-message">
+      Morate biti prijavljeni da biste ocenili film i ostaviljali komentare.
+    </p>
+    }
+  </div>
+</div>

@@ -1,6 +1,6 @@
 export interface Review {
-    _id?: string;           // jedinstveni ID recenzije
-    user: string;            // username korisnika koji je napisao recenziju
+    _id?: string;            // jedinstveni ID recenzije
+    user: string;            // id korisnika
     movieAPI: number;        // ID filma iz API-ja
     movieTitle: string;      // naziv filma
     rating: number;          // ocena 0-10
