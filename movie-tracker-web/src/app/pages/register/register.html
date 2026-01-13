@@ -1,5 +1,5 @@
 <div class="register-container">
-    <form [formGroup]="registerForm" (submit)="submitRegisterForm()" class="register-form">
+    <form [formGroup]="registerForm" (ngSubmit)="submitRegisterForm()" class="register-form">
         <input type="text" placeholder="Korisničko ime" formControlName="username" />
 
         <input type="email" placeholder="Email" formControlName="email" />

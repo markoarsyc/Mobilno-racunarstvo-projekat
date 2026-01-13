@@ -3,6 +3,7 @@ import { Review } from '../../interfaces/review';
 import { ReviewService } from '../../services/review-service';
 import { AuthService } from '../../services/auth-service';
 import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reviews-list',
@@ -13,8 +14,9 @@ import { DatePipe } from '@angular/common';
 export class ReviewsList {
   reviewList = signal<Array<Review>>([]);
   authService = inject(AuthService);
+  router = inject(Router);
   userId = this.authService.getUser()?._id ?? ""; // postavi na ID trenutno prijavljenog korisnika
-  
+
 
   constructor(private reviewService: ReviewService) {
     // effect automatski poziva kad se userId promeni
@@ -31,5 +33,9 @@ export class ReviewsList {
         }
       });
     });
+  }
+
+  goToMovieDetail(movieAPI: number) {
+    this.router.navigate(['/movies', movieAPI]);
   }
 }
